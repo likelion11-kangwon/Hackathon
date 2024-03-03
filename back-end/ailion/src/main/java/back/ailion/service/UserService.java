@@ -91,6 +91,7 @@ public class UserService {
         }
     }
 
+    @Transactional(readOnly = true)
     public List<PostDto> myPosts(String username) {
 
         List<Post> posts = userRepository.findPostsById(userRepository.findByUsername(username).get().getId());
@@ -120,6 +121,7 @@ public class UserService {
         return collect;
     }
 
+    @Transactional
     public UserDto setNickname(String nickname, String username){
         User user = userRepository.setNickname(nickname, username);
 
@@ -132,6 +134,7 @@ public class UserService {
                 .build();
     }
 
+    @Transactional
     public UserDto setEmail(String email, String username){
         User user = userRepository.setEmail(email, username);
 
@@ -144,6 +147,7 @@ public class UserService {
                 .build();
     }
 
+    @Transactional
     public UserDto setDate(Date date, String username){
         User user = userRepository.setDate(date, username);
 
@@ -156,6 +160,7 @@ public class UserService {
                 .build();
     }
 
+    @Transactional
     public UserDto setPassword(String password, String username) {
         String encodePassword = "{bcrypt}" + passwordEncoder.encode(password);
         User user = userRepository.setPassword(encodePassword, username);

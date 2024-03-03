@@ -3,6 +3,7 @@ package back.ailion.service;
 import back.ailion.model.dto.AiInfoResponseDto;
 import back.ailion.model.dto.MainPageDto;
 import back.ailion.model.dto.PostDto;
+import back.ailion.model.entity.AiInfo;
 import back.ailion.model.entity.Post;
 import back.ailion.repository.AiInfoRepository;
 import back.ailion.repository.PostRepository;
@@ -32,10 +33,10 @@ public class MainPageService {
         Page<Post> paging = postRepository.findByDelCheckFalse(pageable);
         Page<PostDto> posts = paging.map(post -> new PostDto(post));
 
-        List<Long> aiInfoIds = aiInfoRepository.top5AI();
+        List<AiInfo> aiInfoIds = aiInfoRepository.top5AI();
         List<AiInfoResponseDto> aiInfos = new ArrayList<>();
-        for(Long id : aiInfoIds){
-            aiInfos.add(new AiInfoResponseDto(aiInfoRepository.findAiInfoById(id)));
+        for(AiInfo aiInfo : aiInfoIds){
+            aiInfos.add(new AiInfoResponseDto(aiInfo));
         }
 
         pageable = PageRequest.of(0, 5);

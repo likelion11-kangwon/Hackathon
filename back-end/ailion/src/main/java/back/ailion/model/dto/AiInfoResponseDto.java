@@ -13,7 +13,6 @@ public class AiInfoResponseDto {
     private String url;
     private String category;
     private String imageUrl;
-    //private LocalDateTime createdAt;
 
     public AiInfoResponseDto(AiInfo aiInfo) {
         this.id = aiInfo.getId();
